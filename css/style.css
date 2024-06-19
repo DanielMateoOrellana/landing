@@ -127,7 +127,7 @@ a {
       top: 0px;
       right: 0px;
       z-index: 2;
-      max-width: 780px;
+      max-width: 1000px;
       left: -20px; }
       @media (min-width: 768px) {
         .hero .hero-img-wrap img {
@@ -278,7 +278,7 @@ a {
       content: "";
       width: 255px;
       height: 217px;
-      background-image: url("../images/dots-yellow.svg");
+      background-image: url("../images/dots-green.svg");
       background-repeat: no-repeat;
       background-size: contain;
       -webkit-transform: translate(-40%, -40%);
@@ -419,6 +419,126 @@ a {
 
 .testimonial-section {
   padding: 3rem 0 7rem 0; }
+
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #dce5e4;
+    border-radius: 10px;
+    background-color: #ffffff;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    color: #2f2f2f;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='rgb(47, 47, 47)' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+  }
+
+  .card {
+    background-color: #f8f9fa;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin-bottom: 30px;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  }
+  
+  .card-body {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #343a40;
+  }
+  
+  .card-title {
+    font-size: 1.75rem;
+    color: #0056b3;
+  }
+  
+  .card-text {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: #6c757d;
+  }
+  
+  .btn-card {
+    align-self: center;
+    padding: 12px 24px;
+    background-color: #28a745;
+    color: white;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-card:hover {
+    background-color: #218838;
+  }
+  
+  /* Estilos base de la tabla */
+.table {
+  width: 100%;
+  margin-bottom: 30px; /* Espacio después de la tabla */
+  border-collapse: collapse; /* Elimina el espacio entre las celdas */
+  background-color: #ffffff; /* Fondo blanco para contraste */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05); /* Sombra sutil para profundidad */
+}
+
+/* Celdas de la tabla */
+.table th, .table td {
+  padding: 15px 20px; /* Espacio generoso para texto */
+  border-bottom: 1px solid #dee2e6; /* Línea sutil entre filas */
+  text-align: left; /* Alineación del texto */
+  vertical-align: middle; /* Alinea el contenido verticalmente al centro */
+}
+
+/* Encabezados de la tabla */
+.table th {
+  background-color: #007bff; /* Azul intenso para destacar */
+  color: #ffffff; /* Texto blanco para contraste */
+  font-size: 16px; /* Tamaño más grande para los encabezados */
+  font-weight: bold; /* Texto en negrita para importancia */
+  text-transform: uppercase; /* Texto en mayúsculas para un look más formal */
+}
+
+/* Hover en las filas para mejorar la interactividad */
+.table tbody tr:hover {
+  background-color: #f8f9fa; /* Fondo más claro al pasar el mouse */
+}
+
+/* Estilo para las celdas */
+.table td {
+  color: #495057; /* Gris oscuro para fácil lectura */
+  font-size: 14px; /* Tamaño adecuado para contenido */
+}
+
+/* Remover el borde del último elemento para una apariencia limpia */
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+  
+  select:focus {
+    border-color: #3b5d50;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    outline: none;
+  }
+  
+  /* Ajustar el padding del contenedor del select */
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
 
 .testimonial-slider-wrap {
   position: relative; }

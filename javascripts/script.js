@@ -1,35 +1,32 @@
-let loaded = (eventLoaded) => {
-
+let loaded = () => {
   let myform = document.getElementById("formulario");
-  myform.addEventListener('submit', (eventSubmit) => {
-    debugger;
-
-  });
-  constformulario = document.getElementById("formulario");
-  constformulario.addEventListener("submit", (event) => {
+  myform.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    nombre = document.getElementById("nombre");
-    email = document.getElementById("email");
+    const nombre = document.getElementById("nombre");
+    const email = document.getElementById("email");
+    const gearOptions = document.getElementById("gear-options");
 
     if (nombre.value.length == 0) {
-      alert("Nombre requerido")
-      nombre.focus()
+      alert("Nombre requerido");
+      nombre.focus();
       return;
     }
 
     if (email.value.length == 0) {
-      alert("Email requerido")
-      email.focus()
+      alert("Email requerido");
+      email.focus();
       return;
     }
 
-    constnombre = document.getElementById("nombre").value;
-    constemail = document.getElementById("email").value;
+    const constnombre = nombre.value;
+    const constemail = email.value;
+    const constgear = gearOptions.value;
 
-    constdatos = {
+    const constdatos = {
       nombre: constnombre,
       email: constemail,
+      gear: constgear,
     };
 
     fetch(
@@ -42,22 +39,36 @@ let loaded = (eventLoaded) => {
         },
       }
     )
-      .then((respuesta) => respuesta.json())
-      .then((datos) => {
-        console.log(datos);
-      })
-      .catch((error) => console.error(error));
+    .then((respuesta) => respuesta.json())
+    .then((datos) => {
+      console.log(datos);
+      agregarFila(constnombre, constemail, constgear);
+      formulario.reset();
+    })
+    .catch((error) => console.error(error));
   });
+
+  // Cargar datos al iniciar
+  obtenerDatos();
 };
 
-obtenerDatos();
+let template = (nombre, email, gear) => `
+  <tr>
+    <td>${nombre}</td>
+    <td>${email}</td>
+    <td>${gear}</td>
+  </tr>
+`;
+function agregarDatos(nombre, email, gear) {
+  let tablebody = document.getElementById("tablebody");
+  let cardsContainer = document.getElementById("cardsContainer");
+  let newRow = template(nombre, email, gear);
+  let newCard = createCard(nombre, email, gear);
 
-let template = (nombre, email) => `
-		<tr>
-			<td>${nombre}</td>
-			<td>${email}</td>
-		</tr>
-	`
+  tablebody.innerHTML += newRow; // Agregar fila a la tabla
+  cardsContainer.innerHTML += newCard; // Agregar tarjeta
+}
+
 async function obtenerDatos() {
   const url = "https://dawm-mateo-daniel-default-rtdb.firebaseio.com/collection.json";
   const respuesta = await fetch(url);
@@ -66,19 +77,40 @@ async function obtenerDatos() {
     return;
   }
   const datos = await respuesta.json();
-  console.log(datos);
 
   let tablebody = document.getElementById("tablebody");
+  let cardsContainer = document.getElementById("cardsContainer");
   tablebody.innerHTML = "";
+  cardsContainer.innerHTML = "";
 
   for (const key in datos) {
     if (datos.hasOwnProperty(key)) {
       let nombre = datos[key].nombre;
       let email = datos[key].email;
-      tablebody.innerHTML += template(nombre, email);
+      let gear = datos[key].gear;
+      agregarDatos(nombre, email, gear); // Actualizar ambas vistas
     }
   }
 }
 
+function agregarFila(nombre, email, gear) {
+  let tablebody = document.getElementById("tablebody");
+  tablebody.innerHTML += template(nombre, email, gear);
+}
+
+function createCard(nombre, email, gear) {
+  const cardHTML = `
+    <div class="col-md-4">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">${nombre}</h5>
+          <p class="card-text">Email: ${email}</p>
+          <p class="card-text">Gear: ${gear}</p>
+        </div>
+      </div>
+    </div>
+  `;
+  return cardHTML;
+}
 
 window.addEventListener("DOMContentLoaded", loaded);
